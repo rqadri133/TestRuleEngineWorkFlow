@@ -17,49 +17,49 @@ Console.WriteLine("Verifying Rules");
 Console.WriteLine("Salary should not be 0/NULL/Empty");
 
 // could use Settings or Environment Variable 
-const string filePath = @"/Users/syedqadri/Documents/Development/TestRuleEngineWorkFlow/Employer.json";
-string jsonStr = "[{ \"FirstName\":\"23234\", \"LastName\":\"Peters\" , \"Salary\":\"100000\", \"Gender\":\"Male\" ,\"City\":\"New York\" }, { \"FirstName\":\"John\", \"LastName\":\"Peters\" , \"Salary\":\"tom\", \"Gender\":\"Male\" ,\"City\":\"New York\" }]";
+const string filePath = @"/Users/syedqadri//Documents/Development/TESTRULEENGINEWORKFLOW/Employer.json";
+string jsonStr = "[{ \"FirstName\":\"Jhon\", \"LastName\":\"Peters\" , \"Salary\":\"100000\", \"Gender\":\"Male\" ,\"City\":\"New York\" }, { \"FirstName\":\"John\", \"LastName\":\"Peters\" , \"Salary\":\"800\", \"Gender\":\"Male\" ,\"City\":\"New York\" }]";
 
 //	2. Salary should not be String
 //	3. Gender should Male, Female, M, L
 //	4. First Name should not be Empty
 //	5. Last Name should not be Empty
-//	6. First Name should not be Number
+//	6. First Name should not be Numbergit
 
 var workflow = new WorkflowRules{
 				WorkflowName = "CheckSalaryRules",
 				Rules= new []{
 					new Rule{
-						RuleName = "CheckSalaryIsNotANumber",
+						RuleName = "Check Salary Must be a Number",
                         SuccessEvent =  "20",
-                        ErrorMessage =  "Salary is not a number",
-                        Expression = "Regex.IsMatch(string(input1.salary),\"[^0-9]\")"
+                        ErrorMessage =  "Salary is  a number",
+                        Expression = "Regex.IsMatch(string(input1.Salary),\"^(0|[1-9][0-9]*)$\")"
 					},
 					new Rule{
-						RuleName = "Check Salary Equal 0",
+						RuleName = "Check Salary Not Equal 0",
                         SuccessEvent =  "10",
                         ErrorMessage =  "Salary is 0",
-						Expression = "input1.salary == \"0\""
+						Expression = "input1.Salary != \"0\""
 					} ,
                     
                     new Rule{
 						RuleName = "Gender Male or Female",
                         SuccessEvent =  "30",
-                        ErrorMessage =  "Gender is MAale or Female",
-						Expression = "input1.gender == \"male\" OR input1.gender == \"female\" " 
+                        ErrorMessage =  "Gender is Not Male or Female",
+						Expression = "input1.Gender == \"Male\" OR input1.Gender == \"Female\" OR input1.Gender == \"M\" OR input1.Gender == \"F\" "
 					},
                        new Rule{
 						RuleName = "First Name and Last Name must not be empty",
                         SuccessEvent =  "10",
                         ErrorMessage =  "First Name Should not be Empty",
-						Expression = "input1.firstname != \"\"  AND  input1.lastname  != \"\" "   
+						Expression = "input1.FirstName != \"\"  AND  input1.LastName  != \"\" "   
 					},
                     
                     new Rule{
 						RuleName = "check First Name Should Not be a Number",
                         SuccessEvent =  "40",
                         ErrorMessage =  "First Name is a Number ",
-						Expression = "Regex.IsMatch(string(input1.firstname),\"^[0-9]*$\")"   
+						Expression = "Regex.IsMatch(string(input1.FirstName),\"[^0-9]\")"   
 					}
 
 
@@ -81,19 +81,25 @@ var workflow = new WorkflowRules{
         // string fullPath = Path.Combine(currentDirectory,  "Employer.json");
 
 			var re = new RulesEngine.RulesEngine(new []{workflow},resettings);
-//JavaScriptSerializer js = new JavaScriptSerializer();
-//Employer [] employers =  js.Deserialize<Employer[]>(filePath);
 
-			Employer[] input1 =  JsonConvert.DeserializeObject<Employer[]>(jsonStr);
+            using StreamReader reader = new(filePath);
+            var json = reader.ReadToEnd();
+            EmployerRoot root =  JsonConvert.DeserializeObject<EmployerRoot>(json);
+			List<Employer> employers = root.Employers;
 
-			
+// Employer[] input1 =  JsonConvert.DeserializeObject<Employer[]>(filePath);
 
-			var result = re.ExecuteAllRulesAsync("CheckSalaryRules", input1).Result;
+			foreach (Employer emp in employers)
+			{
 
-			foreach(var res in result){
-				var output = res.ActionResult.Output;
-				Console.WriteLine($"{res.Rule.RuleName} :\nIsSuccess- {res.IsSuccess}\n \n {res.ExceptionMessage}\n");
-			}
+				var result = re.ExecuteAllRulesAsync("CheckSalaryRules", emp).Result;
+
+				foreach (var res in result)
+				{
+					var output = res.ActionResult.Output;
+					Console.WriteLine($"{res.Rule.RuleName} :\nIsSuccess- {res.IsSuccess}\n \n {res.ExceptionMessage}\n");
+				}
 
 
 
+}

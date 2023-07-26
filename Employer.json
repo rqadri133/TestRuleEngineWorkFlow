@@ -1,2 +1,4 @@
-
-[{ "FirstName":"John", "LastName":"Peters" , "Salary":"100000", "Gender":"Male" ,"City":"New York" }, { "FirstName":"John", "LastName":"Peters" , "Salary":"100000", "Gender":"Male" ,"City":"New York" }]
+{
+"Employers":[
+    { "FirstName":"John", "LastName":"Peters" , "Salary":"100000", "Gender":"Male" ,"City":"New York" }, { "FirstName":"John", "LastName":"Peters" , "Salary":"100000", "Gender":"Male" ,"City":"New York" }]
+}

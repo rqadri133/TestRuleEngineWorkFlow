@@ -5,6 +5,7 @@ using Newtonsoft.Json;
 
  namespace TestRuleEngineWorkFlow.Models 
  {
+    
     public class Employer
     {
         [JsonProperty("firstname")]

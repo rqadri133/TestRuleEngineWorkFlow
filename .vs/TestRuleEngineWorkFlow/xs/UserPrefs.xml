@@ -1,3 +1,35 @@
 ﻿<Properties StartupConfiguration="{CFDACEFB-BF26-4722-A0D1-D807632DA87A}|Default">
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.ItemProperties.TestRuleEngineWorkFlow PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="EmployerRoot.cs">
+    <Files>
+      <File FileName="Program.cs" Line="81" Column="74" />
+      <File FileName="Employer.json" Line="5" Column="1" />
+      <File FileName="Employer.cs" Line="1" Column="1" />
+      <File FileName="EmployerRoot.cs" Line="1" Column="1" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="TestRuleEngineWorkFlow" expanded="True">
+            <Node name="TestRuleEngineWorkFlow" expanded="True">
+              <Node name="EmployerRoot.cs" selected="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+      <Pad Id="MonoDevelop.Debugger.WatchPad">
+        <State />
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore>
+      <Breakpoint file="/Users/syedqadri/Documents/Development/TestRuleEngineWorkFlow/Program.cs" relfile="Program.cs" line="75" column="1" />
+      <Breakpoint file="/Users/syedqadri/Documents/Development/TestRuleEngineWorkFlow/Program.cs" relfile="Program.cs" line="95" column="1" />
+      <Breakpoint file="/Users/syedqadri/Documents/Development/TestRuleEngineWorkFlow/Program.cs" relfile="Program.cs" line="83" column="1" />
+    </BreakpointStore>
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
 </Properties>
